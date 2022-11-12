@@ -10,7 +10,7 @@ class Usuario(SafeDeleteModel):
     apellido_materno = models.CharField(max_length=255)
     correo = models.CharField(max_length=255)
     username = models.CharField(max_length=255)
-    clave = models.CharField(max_length=255)
+    password = models.CharField(max_length=255)
     empleado = models.BooleanField(default=False)
     class Meta: 
         verbose_name = "usuario"
