@@ -104,7 +104,8 @@ class Escalas(SafeDeleteModel):
 class Asiento(SafeDeleteModel):
     _safe_delete_policy = SOFT_DELETE_CASCADE
     id = models.BigAutoField(primary_key=True)
-    Fila = models.CharField(max_length=1)
+    fila = models.CharField(max_length=1)
+    columna= models.CharField(max_length=1)
     primera_clase = models.BooleanField(default=False)
     Asiento = models.CharField(max_length=2)
     disponible = models.BooleanField(default=False)
