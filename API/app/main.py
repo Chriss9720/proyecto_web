@@ -1,6 +1,7 @@
 from routers import user
 from utils.app_exceptions import AppExceptionCase
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from routers import base, token, piloto, pais_estado, aereoPuerto, avion, asientos, boletos
 from configs.database import create_tables
@@ -30,6 +31,21 @@ app = FastAPI(
     description="FastAPI template implementa las 4 operaciones basicas de CRUD",
     version="1.0.0",
     openapi_url="/api/v1/openapi.json",
+)
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.state.limiter = limiter

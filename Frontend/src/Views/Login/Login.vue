@@ -60,6 +60,7 @@
 <script>
 import { useLogin } from "./Composables/UseLogin";
 import RegistroUsuario from "./Components/Registro.vue";
+import axios from "axios";
 
 export default {
   name: 'Login-v',
@@ -98,6 +99,14 @@ export default {
       this.valregistro = true;
     }
   },
+  created() {
+    axios
+      .get("http://127.0.0.1:8001/")
+      .then(response => {
+        console.log(response);
+      })
+      .catch(e => console.log(e));
+  }
 };
 </script>
 
