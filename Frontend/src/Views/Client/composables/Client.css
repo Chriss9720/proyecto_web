@@ -1,0 +1,89 @@
+h1,h4 {
+    font-family: 'Kaushan Script', cursive;
+}
+
+p {
+    font-family: cursive;
+}
+.banner {
+    height: 100vh;
+    background-image: url("@/assets/fondoBanner.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    text-align: center;
+}
+
+.principal {
+    margin-top: 3%;
+    margin-right: 3%;
+    opacity: 0.7;
+    width: 60%;
+    height: 60%;
+    background-color: whitesmoke;
+}
+
+.secClima{
+    height: 100vh;
+    background-image: url("@/assets/fondoClima.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.centroClima{
+    margin-top: 5%;
+    margin-left: 10%;
+    opacity: 0.7;
+    width: 80%;
+    height: 85%;
+    background-color: whitesmoke;
+}
+.climaDatos{
+    width: 90%;
+    height: 300px;
+}
+.secEquipaje{
+    height: 100vh;
+    background-image: url("@/assets/fondoEquipaje2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.MenEquipaje{
+    margin-top: 10%;
+    margin-left: 2%;
+    opacity: 0.7;
+    width: 13%;
+    height: 60%;
+    background-color: whitesmoke;
+}
+.CalEquipaje{
+    margin-top: 7%;
+    margin-right: 5%;
+    opacity: 0.7;
+    width: 40%;
+    height: 70%;
+    background-color: whitesmoke;
+}
+.calEchico{
+    margin-top: 3%;
+    margin-left: 10%;
+}
+.mybtn2{
+width: 70%;
+}
+.colClima{
+    background-color: black;
+    height: 320px;
+}
+.marC{
+    margin-top: 10%;
+}
+.enlace {
+    cursor: pointer;
+    border: 0px solid #3498db;
+    background-color: transparent;
+    color: #3498db;
+    text-decoration: underline;
+  }
