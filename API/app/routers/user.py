@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends
+
+from services.user import UserService
 
 from schemas.user import UserRegister
 
@@ -8,13 +10,13 @@ from configs.database import get_db
 
 router = APIRouter(
     prefix="/users",
-    tags=["Users"],
-    responses={404: {"description": "Not found"}},
+    tags=["Users"]
 )
 
 @router.post("/")
-async def registro(request: Request, item: UserRegister):
-    return {"msg": "Registro exitoso"}
+async def registro(request: Request, item: UserRegister, db: get_db = Depends()):
+    result = handle_result(UserService(db).create_user(item))
+    return result
 
 @router.get("/")
 async def get(request: Request, id:int):

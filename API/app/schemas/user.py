@@ -17,11 +17,11 @@ class User(UserData):
     class Config:
         orm_mode = True
 
-class UserCreate(UserData):
+class UserCreate(BaseModel):
     username: str
     password: str
 
-class UserRegister(UserData):
+class UserRegister(UserCreate):
     nombre: str
     apellido_paterno: str
     apellido_materno: str
