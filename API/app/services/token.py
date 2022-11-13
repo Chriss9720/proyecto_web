@@ -15,12 +15,12 @@ class TokenService(AppService):
         exist = UserCRUD(self.db).get_user_by_username(user.username)
 
         if not exist:
-            return ServiceResult(AppException.GetToken({"Message": "Incorrect username or password"}))
+            return ServiceResult(AppException.GetToken({"Message": "Usuario y/o contraseña incorrecto"}))
 
         is_logged = verify_password(user.password, exist.password)
 
         if not is_logged:
-            return ServiceResult(AppException.TokenInvalidCredentials({"Message": "Incorrect username or password"}))
+            return ServiceResult(AppException.TokenInvalidCredentials({"Message": "Usuario y/o contraseña incorrecto"}))
         
         access_token_expires = timedelta(days=ACCESS_TOKEN_EXPIRE_DAYS)
 
@@ -29,7 +29,7 @@ class TokenService(AppService):
         token = TokenCRUD(self.db).create_token(exist.id, token)
         
         if not token:
-            return ServiceResult(AppException.CreateToken({"Message": "Incorrect username or password"}))
+            return ServiceResult(AppException.CreateToken({"Message": "Usuario y/o contraseña incorrecto"}))
 
         token = Token(access_token=token.token, token_type="Bearer")
 

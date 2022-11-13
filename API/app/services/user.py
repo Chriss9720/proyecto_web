@@ -12,7 +12,7 @@ class UserService(AppService):
         if (user):
             verify_username = UserCRUD(self.db).get_user_by_username(user.username)
             if(verify_username and verify_username.id != id):
-                return ServiceResult(AppException.User({"Message": f"Ya existe un usuario con el username: {user.username}"}))
+                return ServiceResult(AppException.User({"Message": f"Ya existe un usuario con el nombre de usuario: {user.username}"}))
 
         if (id):
             user = UserCRUD(self.db).get_by_id(id)
