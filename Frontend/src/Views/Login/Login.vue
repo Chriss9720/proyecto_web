@@ -15,17 +15,18 @@
               </div>
               <form @submit.prevent="makeLogin">
                 <div class="form-group">
-                  <label>Correo eléctronico</label>
-                  <input v-model="clientId" type="email" name="email" class="form-control" id="email"
-                    placeholder="Ingresar email">
+                  <label>Nombre de usuario</label>
+                  <input v-model="nomUsu" type="text"  class="form-control" 
+                    placeholder="Ingresar usuario">
                 </div>
                 <div class="form-group">
                   <label>Constraseña</label>
-                  <input type="password" name="password" id="password" class="form-control"
+                  <input v-model="password"  type="password" name="password" id="password" class="form-control"
                     placeholder="Ingresar contraseña">
                 </div>
                 <div class="col-md-12 text-center ">
                   <br>
+                  <p v-if="errorDatos" class="text-danger">!Ingrese todos los datos¡</p>
                   <button class=" btn btn-block mybtn btn-primary tx-tfm">Ingresar</button>
                 </div>
                 <div class="col-md-12 ">
@@ -35,19 +36,9 @@
                 </div>
               </form>
               <div class="form-group">
-                <p class="text-center">¿No tienes una cuenta? <button class="registro"
-                    v-on:click="Registrarse()">¡Registrate aqui!</button></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-8 mx-auto" v-if="vregistro">
-            <div class="myformR">
-              <Registro-Usuario :tipoEmpleado="true" :titulo="tit" />
-              <div class="text-center">
-                <br>
-                <h2 v-if="valregistro" class="text-success">Registro exitoso</h2>
-                <button v-on:click="cancelar()" class=" btn btn-block mybtn btn-primary tx-tfm">Cancelar</button>
-                <button v-on:click="ValRegistro()" class=" btn btn-block mybtn btn-primary tx-tfm">Registrarse</button>
+                <p class="text-center">¿No tienes una cuenta? <router-link :to="{ name: 'Registro' }">¡Registrate aqui!
+                  </router-link>
+                </p>
               </div>
             </div>
           </div>
@@ -59,53 +50,29 @@
 
 <script>
 import { useLogin } from "./Composables/UseLogin";
-import RegistroUsuario from "./Components/Registro.vue";
-import axios from "axios";
 
 export default {
   name: 'Login-v',
   data: () => ({
     tit: "Registro de usuario",
-    vlogin: true,
-    vregistro: false,
-    valregistro: false
+    vlogin: true
   }),
-  components: {
-    RegistroUsuario
-  },
   setup() {
     const {
       makeLogin,
-      clientId,
-      hasError
+      nomUsu,
+      password,
+      hasError,
+      errorDatos
     } = useLogin();
 
     return {
-      clientId,
+      nomUsu,
       makeLogin,
-      hasError
+      password,
+      hasError,
+      errorDatos
     };
-  },
-  methods: {
-    Registrarse() {
-      this.vlogin = false;
-      this.vregistro = true;
-    },
-    cancelar() {
-      this.vlogin = true;
-      this.vregistro = false;
-    },
-    ValRegistro() {
-      this.valregistro = true;
-    }
-  },
-  created() {
-    axios
-      .get("http://127.0.0.1:8001/")
-      .then(response => {
-        console.log(response);
-      })
-      .catch(e => console.log(e));
   }
 };
 </script>
@@ -115,29 +82,6 @@ h1,
 h2,
 h3 {
   font-family: 'Kaushan Script', cursive;
-}
-
-.registro {
-  cursor: pointer;
-  border: 0px solid #3498db;
-  background-color: transparent;
-  color: #3498db;
-  font-size: 1em;
-  text-decoration: underline;
-}
-
-.myformR {
-
-  padding: 1rem;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  pointer-events: auto;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, .2);
-  border-radius: 1.1rem;
-  text-align: left;
 }
 
 .myform {
