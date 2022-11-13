@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Depends, Request
 
+from schemas.user import User
 from schemas.Avion import PostAvion, GetAvion, Avion
 
+from utils.auth import get_current_user
 from utils.service_result import handle_result
 
 from configs.database import get_db
@@ -13,21 +15,21 @@ router = APIRouter(
 )
 
 @router.post("/")
-async def create(request: Request, item: PostAvion):
+async def create(request: Request, item: PostAvion, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
     return {"msg": "Registro exitoso"}
 
 @router.post("/{id}")
-async def update(request: Request, id:int, item: PostAvion):
+async def update(request: Request, id:int, item: PostAvion, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
     return {"msg": "Registro exitoso"}
 
 @router.get("/all", response_model=GetAvion)
-async def get_all(request: Request):
+async def get_all(request: Request, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
     return ""
 
 @router.get("/by_id/{id}", response_model=Avion)
-async def get_all(request: Request, id: int):
+async def get_all(request: Request, id: int, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
     return ""
 
 @router.get("/ruta/{origen}/{destino}", response_model=GetAvion)
-async def get_ruta(request: Request):
+async def get_ruta(request: Request, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
     return ""

@@ -27,7 +27,7 @@ create_tables()
 limiter = Limiter(key_func=get_remote_address)
 
 app = FastAPI(
-    title="FastAPI-Template",
+    title="API para la materia de web",
     description="FastAPI template implementa las 4 operaciones basicas de CRUD",
     version="1.0.0",
     openapi_url="/api/v1/openapi.json",
