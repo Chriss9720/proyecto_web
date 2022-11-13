@@ -25,12 +25,14 @@ async def app_exception_handler(request: Request, exc: AppExceptionCase):
 
 class AppException(object):
 
+    class Piloto(AppExceptionCase):
+        def __init__(self, context: dict = None):
+            status_code = 422
+            AppExceptionCase.__init__(self, status_code, context)
+
     class User(AppExceptionCase):
         def __init__(self, context: dict = None):
-            """
-            User creation failed
-            """
-            status_code = 404
+            status_code = 422
             AppExceptionCase.__init__(self, status_code, context)
 
     class CreateToken(AppExceptionCase):
