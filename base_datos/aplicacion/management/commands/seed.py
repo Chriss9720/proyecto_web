@@ -21,7 +21,7 @@ def PaisesEstados():
 
     print("Insertando paises y estados...")
     json_array = json.load(f)
-    total = len(json_array)
+    total = len(json_array) - 1
     for cont, value in enumerate(json_array):
         print(f"{cont} de {total}")
         pais = Pais.objects.get_or_create(
