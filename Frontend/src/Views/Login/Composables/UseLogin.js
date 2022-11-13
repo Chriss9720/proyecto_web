@@ -1,24 +1,48 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import apiService from '@/services/ApiService';
 
 // eslint-disable-next-line
 export function useLogin() {
   const router = useRouter();
 
-  const clientId = ref('');
+  const nomUsu = ref('');
+  const password = ref('');
   const hasError = ref(false);
+  const ValError = ref('');
+  const errorDatos = ref(false);
 
   const makeLogin = async () => {
-    if(clientId.value == "admin@gmail.com"){
+    if (nomUsu.value == '' || password.value == ('')) {
+      errorDatos.value = true;
+    } else {
+      if (nomUsu.value == "admin@gmail.com") {
         router.push({ name: 'AdminHome' });
-    }else{
-        router.push({name: "ClientHome"});
+      } else {
+        console.log(nomUsu.value,password.value);
+        apiService.post('/tokens', {
+          username: nomUsu.value,
+          password: password.value
+        })
+          .then(function (response) {
+            router.push({ name: "ClientHome" });
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+            ValError.value = error.response.data.context.Message;
+            hasError.value = true;
+          })
+      }
+
     }
   };
 
   return {
     makeLogin,
-    clientId,
-    hasError
+    nomUsu,
+    password,
+    hasError,
+    errorDatos
   };
 }
