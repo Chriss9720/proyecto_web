@@ -25,7 +25,7 @@ class UserService(AppService):
         user = handle_result(self.validar(user, None))
         user.password = hash_password(user.password)
         user = UserCRUD(self.db).create_user(user)
-        return ServiceResult(user)
+        return ServiceResult(user.info_basica())
 
     def get_by_id(self, id) -> ServiceResult:
         user = handle_result(self.validar(None, id))
