@@ -1,5 +1,7 @@
 from pydantic import BaseModel, constr
 
+from utils.regex import Regex
+
 class Credential(BaseModel):
     username: str
     password: str
@@ -22,9 +24,9 @@ class UserCreate(BaseModel):
     password: str
 
 class UserRegister(UserCreate):
-    nombre: str
-    apellido_paterno: str
-    apellido_materno: str
+    nombre: constr(strict=True, regex=Regex.name, min_length=1, max_length=255)
+    apellido_paterno: constr(strict=True, regex=Regex.name, min_length=1, max_length=255)
+    apellido_materno: constr(strict=True, regex=Regex.name, min_length=1, max_length=255)
     correo: str
     empleado: bool
 
