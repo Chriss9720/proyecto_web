@@ -19,13 +19,16 @@ async def registro(request: Request, item: UserRegister, db: get_db = Depends())
     return result
 
 @router.get("/")
-async def get(request: Request, id:int):
-    return UserRegister.to_dict()
+async def get(request: Request, id:int, db: get_db = Depends()):
+    result = handle_result(UserService(db).get_by_id(id))
+    return result
 
-@router.put("/")
-async def update(request: Request, item: UserRegister):
-    return {"msg": "Actualizacion exitosa"}
+@router.put("/{id}")
+async def update(request: Request, id: int, item: UserRegister, db: get_db = Depends()):
+    result = handle_result(UserService(db).update(id, item))
+    return result
 
-@router.delete("/")
-async def delete(request: Request):
-    return {"msg": "Baja exitosa"}
+@router.delete("/{id}")
+async def delete(request: Request, id: int, db: get_db = Depends()):
+    result = handle_result(UserService(db).deleted(id))
+    return result

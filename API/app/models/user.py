@@ -15,3 +15,14 @@ class UsersDB(Base):
     
     deleted = Column(DateTime, default=None)
     deleted_by_cascade = Column(Boolean, default=False)
+
+    def info_basica(self):
+        return {
+            "id": self.id,
+            "nombre": self.nombre,
+            "apellido_paterno": self.apellido_paterno,
+            "apellido_materno": self.apellido_materno,
+            "correo": self.correo,
+            "username": self.username,
+            
+        }

@@ -25,90 +25,10 @@ async def app_exception_handler(request: Request, exc: AppExceptionCase):
 
 class AppException(object):
 
-    class FooCreateItem(AppExceptionCase):
-        def __init__(self, context: dict = None):
-            """
-            Item creation failed
-            """
-            status_code = 500
-            AppExceptionCase.__init__(self, status_code, context)
-    
-    class FooUpdateItem(AppExceptionCase):
-        def __init__(self, context: dict = None):
-            """
-            Item update failed
-            """
-            status_code = 500
-            AppExceptionCase.__init__(self, status_code, context)
-    
-    class FooDeleteItem(AppExceptionCase):
-        def __init__(self, context: dict = None):
-            """
-            Item delete failed
-            """
-            status_code = 500
-            AppExceptionCase.__init__(self, status_code, context)
-
-    class FooGetItem(AppExceptionCase):
-        def __init__(self, context: dict = None):
-            """
-            Item not found
-            """
-            status_code = 404
-            AppExceptionCase.__init__(self, status_code, context)
-    
-    class FooGetAll(AppExceptionCase):
-        def __init__(self, context: dict = None):
-            """
-            Item not found
-            """
-            status_code = 404
-            AppExceptionCase.__init__(self, status_code, context)
-
-    class FooItemRequiresAuth(AppExceptionCase):
-        def __init__(self, context: dict = None):
-            """
-            Item is not public and requires auth
-            """
-            status_code = 401
-            AppExceptionCase.__init__(self, status_code, context)
-
-    class GetUser(AppExceptionCase):
-        def __init__(self, context: dict = None):
-            """
-            User not found
-            """
-            status_code = 404
-            AppExceptionCase.__init__(self, status_code, context)
-
-    class GetAllUser(AppExceptionCase):
-        def __init__(self, context: dict = None):
-            """
-            Users not found
-            """
-            status_code = 404
-            AppExceptionCase.__init__(self, status_code, context)
-
-    class CreateUser(AppExceptionCase):
+    class User(AppExceptionCase):
         def __init__(self, context: dict = None):
             """
             User creation failed
-            """
-            status_code = 404
-            AppExceptionCase.__init__(self, status_code, context)
-
-    class UpdateUser(AppExceptionCase):
-        def __init__(self, context: dict = None):
-            """
-            User update failed
-            """
-            status_code = 404
-            AppExceptionCase.__init__(self, status_code, context)
-    
-    class DeleteUser(AppExceptionCase):
-        def __init__(self, context: dict = None):
-            """
-            User delete failed
             """
             status_code = 404
             AppExceptionCase.__init__(self, status_code, context)
