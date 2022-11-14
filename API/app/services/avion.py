@@ -2,6 +2,7 @@ from services.main import AppService
 from services.escalas import EscalasService
 from services.aereoPuerto import AereoPuertoService
 from services.piloto import PilotoService
+from services.asientos import AsientosService
 
 from daos.avion_dao import AvionCRUD
 
@@ -26,8 +27,9 @@ class AvionService(AppService):
             handle_result(EscalasService(self.db).validar(item.escalas))
         avion = AvionCRUD(self.db).crear(item, escalas)
 
+        AsientosService(self.db).crear(avion)
+        
         if (escalas):
             EscalasService(self.db).crear(item.escalas, avion.id)
 
         return ServiceResult({"msg": "Avion creado exitosamente"})
-    
