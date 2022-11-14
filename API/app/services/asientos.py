@@ -47,6 +47,10 @@ class AsientosService(AppService):
             })
         return ServiceResult({'asientos': result})
 
+    def get_by_id(self, id) -> ServiceResult:
+        asiento = AsientoCRUD(self.db).get(id)
+        return ServiceResult(asiento)
+
     def get_by_fila(self, avion_id, columna, fila) -> ServiceResult:
         asiento = AsientoCRUD(self.db).get_by_fila(avion_id, columna, fila)
         if (not asiento):

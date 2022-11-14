@@ -1,9 +1,9 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
-from datetime import datetime
+from datetime import date
 
-from schemas.Avion import Escalas
+from schemas.Avion import Escala
 
 class PutAsiento(BaseModel):
     id: int
@@ -27,9 +27,9 @@ class Boleto(BaseModel):
     folio: str
     origen_id: str
     destino_id: str
-    escalas: List[Escalas]
-    salida: datetime
-    llegada: datetime
+    escalas: Optional[List[Escala]]
+    salida: date
+    llegada: date
     estado: str
     asientos: List[Asiento]
 

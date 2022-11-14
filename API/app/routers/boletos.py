@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Depends, Request
 
+from services.boletos import BoletoService
+
 from schemas.user import User
 from schemas.boletos import Boletos
 
@@ -16,4 +18,5 @@ router = APIRouter(
 
 @router.get("/", response_model=Boletos)
 async def create(request: Request, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
-    return {"msg": "Registro exitoso"}
+    result = handle_result(BoletoService(db).mis_boletos(current_user))
+    return result

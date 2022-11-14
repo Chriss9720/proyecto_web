@@ -16,3 +16,11 @@ class BoletoRUD(AppCRUD):
         self.db.commit()
         self.db.refresh(boleto)
         return boleto
+
+    def mis_boletos(self, user) -> BoletoDB:
+        return self.db.query(
+            BoletoDB.asiento_id
+        ).filter(
+            BoletoDB.usuario_id == user.id,
+            BoletoDB.deleted == None
+        ).all()
