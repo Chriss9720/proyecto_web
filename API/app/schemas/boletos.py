@@ -13,11 +13,12 @@ class Comprar(BaseModel):
 
 class Asiento(BaseModel):
     fila: str
-    columna: int
+    columna: str
     primera_clase: bool
     disponible: bool
     costo: float
     id: int
+    asiento: str
 
 class Asientos(BaseModel):
     asientos: List[Asiento]
