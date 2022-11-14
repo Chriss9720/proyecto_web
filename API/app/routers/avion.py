@@ -23,16 +23,20 @@ async def create(request: Request, item: PostAvion, db: get_db = Depends(), curr
 
 @router.put("/{id}")
 async def update(request: Request, id: int, item: Escalas, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
-    return {"msg": "Registro exitoso"}
+    result = handle_result(AvionService(db).actualizar(id, item))
+    return result
 
 @router.get("/all", response_model=GetAvion)
 async def get_all(request: Request, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
-    return ""
+    result = handle_result(AvionService(db).get_all())
+    return result
 
 @router.get("/by_id/{id}", response_model=Avion)
 async def get_all(request: Request, id: int, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
-    return ""
+    result = handle_result(AvionService(db).get_avion_by_id(id))
+    return result
 
 @router.get("/ruta/{origen}/{destino}", response_model=GetAvion)
-async def get_ruta(request: Request, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
-    return ""
+async def get_ruta(request: Request, origen: int, destino: int, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
+    result = handle_result(AvionService(db).get_bt_origen_destino(origen, destino))
+    return result

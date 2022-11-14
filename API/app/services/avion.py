@@ -28,8 +28,72 @@ class AvionService(AppService):
         avion = AvionCRUD(self.db).crear(item, escalas)
 
         AsientosService(self.db).crear(avion)
-        
+
         if (escalas):
             EscalasService(self.db).crear(item.escalas, avion.id)
 
         return ServiceResult({"msg": "Avion creado exitosamente"})
+
+    def get_all(self) -> ServiceResult:
+        result = []
+        for avion in AvionCRUD(self.db).get_all():
+            result.append({
+                "cap_max_pasajeros": str(avion.cap_max_pasajeros),
+                "cap_max_equipaje_kilos": str(avion.cap_max_equipaje_kilos),
+                "origen_id": str(avion.origen_id),
+                "destino_id": str(avion.destino_id),
+                "escalas": handle_result(EscalasService(self.db).get_escalas(avion.id)),
+                "salida": avion.salida,
+                "llegada": avion.llegada,
+                "filas": str(avion.filas),
+                "estado": avion.estado,
+                "piloto_id": str(avion.piloto_id),
+                "id": avion.id,
+                "folio": avion.folio
+            })
+        return ServiceResult({'aviones': result})
+
+    def get_avion_by_id(self, avion_id):
+        avion = AvionCRUD(self.db).get_by_id(avion_id)
+        if (not avion):
+            return ServiceResult(AppException.Avion({'detail': f'No existe un avion con el id {avion_id}'}))
+        result = {
+            "cap_max_pasajeros": str(avion.cap_max_pasajeros),
+            "cap_max_equipaje_kilos": str(avion.cap_max_equipaje_kilos),
+            "origen_id": str(avion.origen_id),
+            "destino_id": str(avion.destino_id),
+            "escalas": handle_result(EscalasService(self.db).get_escalas(avion.id)),
+            "salida": avion.salida,
+            "llegada": avion.llegada,
+            "filas": str(avion.filas),
+            "estado": avion.estado,
+            "piloto_id": str(avion.piloto_id),
+            "id": avion.id,
+            "folio": avion.folio
+        }
+        return ServiceResult(result)
+
+    def get_bt_origen_destino(self, origen_id, destino_id) -> ServiceResult:
+        result = []
+        for avion in AvionCRUD(self.db).get_bt_origen_destino(origen_id, destino_id):
+            result.append({
+                "cap_max_pasajeros": str(avion.cap_max_pasajeros),
+                "cap_max_equipaje_kilos": str(avion.cap_max_equipaje_kilos),
+                "origen_id": str(avion.origen_id),
+                "destino_id": str(avion.destino_id),
+                "escalas": handle_result(EscalasService(self.db).get_escalas(avion.id)),
+                "salida": avion.salida,
+                "llegada": avion.llegada,
+                "filas": str(avion.filas),
+                "estado": avion.estado,
+                "piloto_id": str(avion.piloto_id),
+                "id": avion.id,
+                "folio": avion.folio
+            })
+        return ServiceResult({'aviones': result})
+
+    def actualizar(self, avion_id, items) -> ServiceResult:
+        avion = AvionCRUD(self.db).get_by_id(avion_id)
+        if (not avion):
+            return ServiceResult(AppException.Avion({'detail': f'No existe un avion con el id {avion_id}'}))
+        return EscalasService(self.db).actualizar(avion.id, items)

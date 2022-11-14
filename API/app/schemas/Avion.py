@@ -3,12 +3,12 @@ from typing import List
 
 from utils.regex import Regex
 
-from datetime import datetime
+from datetime import date
 
 class Escala(BaseModel):
     aereoPuerto: constr(strict=True, regex=Regex.digits, max_length=255, min_length=1)
-    salida: datetime
-    llegada: datetime
+    salida: date
+    llegada: date
 
 class Escalas(BaseModel):
     escalas: List[Escala]
@@ -19,8 +19,8 @@ class PostAvion(BaseModel):
     origen_id: constr(strict=True, regex=Regex.digits, max_length=255, min_length=1)
     destino_id: constr(strict=True, regex=Regex.digits, max_length=255, min_length=1)
     escalas: List[Escala]
-    salida: datetime
-    llegada: datetime
+    salida: date
+    llegada: date
     filas: constr(strict=True, regex=Regex.digits, max_length=255, min_length=1)
     estado: str
     piloto_id: constr(strict=True, regex=Regex.digits, max_length=255, min_length=1)
