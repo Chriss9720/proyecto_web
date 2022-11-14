@@ -82,6 +82,8 @@ class PilotoService(AppService):
     
     def get_by_id(self, id) -> ServiceResult:
         piloto = PilotoCRUD(self.db).get_by_id(id)
+        if (not piloto):
+            return ServiceResult(AppException.Piloto({'detail': f"No existe un piloto con el id {id}"}))
         return ServiceResult({
                 "nombre": piloto.nombre,
                 "edad": str(piloto.edad),

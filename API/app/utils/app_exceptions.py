@@ -25,6 +25,16 @@ async def app_exception_handler(request: Request, exc: AppExceptionCase):
 
 class AppException(object):
 
+    class AereoPuerto(AppExceptionCase):
+        def __init__(self, context: dict = None):
+            status_code = 422
+            AppExceptionCase.__init__(self, status_code, context)
+
+    class Avion(AppExceptionCase):
+        def __init__(self, context: dict = None):
+            status_code = 422
+            AppExceptionCase.__init__(self, status_code, context)
+
     class Piloto(AppExceptionCase):
         def __init__(self, context: dict = None):
             status_code = 422

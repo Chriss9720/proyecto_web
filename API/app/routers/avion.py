@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Depends, Request
 
+from services.avion import AvionService
+
 from schemas.user import User
-from schemas.Avion import PostAvion, GetAvion, Avion
+from schemas.Avion import PostAvion, GetAvion, Avion, Escalas
 
 from utils.auth import get_current_user
 from utils.service_result import handle_result
@@ -16,10 +18,11 @@ router = APIRouter(
 
 @router.post("/")
 async def create(request: Request, item: PostAvion, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
-    return {"msg": "Registro exitoso"}
+    result = handle_result(AvionService(db).crear(item))
+    return result
 
-@router.post("/{id}")
-async def update(request: Request, id:int, item: PostAvion, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
+@router.put("/{id}")
+async def update(request: Request, id: int, item: Escalas, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
     return {"msg": "Registro exitoso"}
 
 @router.get("/all", response_model=GetAvion)

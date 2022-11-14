@@ -1,10 +1,10 @@
-from sqlalchemy import BigInteger, Column, String, Boolean, DateTime, ForeignKey, Float, Integer, Date
+from sqlalchemy import BigInteger, Column, Boolean, DateTime, ForeignKey, Date
 from configs.database import Base
 
 from models.aereoPuerto import AereoPuertoDB
 from models.avion import AvionDB
 
-class AereoPuertoDB(Base):
+class EscalasDB(Base):
     __tablename__ = "escala"
 
     id = Column(BigInteger, primary_key=True, index=True)
