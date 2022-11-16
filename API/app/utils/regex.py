@@ -1,6 +1,6 @@
 class Regex:
 
-    name = "^[a-zA-Z\sá-ú]%"
+    name = "^[a-zA-Z\sá-ú]+$"
 
     digits = "^\d+$"
 
