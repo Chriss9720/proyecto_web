@@ -18,6 +18,13 @@ class PilotoCRUD(AppCRUD):
         self.db.refresh(piloto)	
         return piloto
 
+    def get(self, id) -> PilotoDB:
+        return self.db.query(
+            PilotoDB
+        ).filter(
+            PilotoDB.id == id
+        ).first()
+
     def actualizar(self, piloto_db, item) -> PilotoDB:
         piloto_db.nombre_completo = item.nombre
         piloto_db.edad = item.edad

@@ -19,12 +19,12 @@ class PilotoService(AppService):
 
     def actualizar(self, id, item) -> ServiceResult:
         handle_result(self.validar(item))
-        piloto_db = PilotoCRUD(self.db).get_by_id(id)
+        piloto_db = PilotoCRUD(self.db).get(id)
         PilotoCRUD(self.db).actualizar(piloto_db, item)
         return ServiceResult({"msg": "Actualizacion exitosa"})
 
     def deleted(self, id) -> ServiceResult:
-        piloto_db = PilotoCRUD(self.db).get_by_id(id)
+        piloto_db = PilotoCRUD(self.db).get(id)
         PilotoCRUD(self.db).deleted(piloto_db)
         return ServiceResult({"msg": "Eliminado exitoso"})
 
