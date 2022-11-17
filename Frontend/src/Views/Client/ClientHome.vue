@@ -41,52 +41,57 @@
                     <p>El clima a veces influye en nuestros planes de viaje, asi que no olvides revisar el clima de los
                         proximos dias</p>
                     <div class="container py-2 my-2 climaDatos">
-                        <select class="form-select" style="width:40%" aria-label="Default select example">
+                        <!--<select class="form-select" style="width:40%" aria-label="Default select example">
                             <option selected>Open this select menu</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
-                        </select>
+                        </select> -->
                         <div v-if="datosClima != null">
                             <div class="row text-white">
                                 <div class="col colClima border">
                                     <div class="marC">
-                                        <h3>{{ getfecha(4)[0] }}</h3>
+                                        <p class="titclima">{{ getfecha(4)[0] }}</p>
                                         <img id="imgLibro" v-bind:src="iconoLink" />
-                                        <p>{{ datosClima.list[4].weather[0].description }}</p>
-                                        <p>Temperatura media: {{ datosClima.list[4].main.temp_min }}°C</p>
+                                        <p class="desclima">{{ datosClima.list[4].weather[0].description }}
+                                            <br>Temperatura: {{ datosClima.list[4].main.temp_min }}°C
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col colClima border">
                                     <div class="marC">
-                                        <h3>{{ getfecha(11)[0] }}</h3>
+                                        <p class="titclima">{{ getfecha(11)[0] }}</p>
                                         <img id="imgLibro" v-bind:src="iconoLink" />
-                                        <p>{{ datosClima.list[11].weather[0].description }}</p>
-                                        <p>Temperatura: {{ datosClima.list[11].main.temp_min }}°C</p>
+                                        <p class="desclima"> {{ datosClima.list[11].weather[0].description }}
+                                            <br>Temperatura: {{ datosClima.list[11].main.temp_min }}°C
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col colClima border">
                                     <div class="marC">
-                                        <h3>{{ getfecha(19)[0] }}</h3>
+                                        <p class="titclima">{{ getfecha(19)[0] }}</p>
                                         <img id="imgLibro" v-bind:src="iconoLink" />
-                                        <p>{{ datosClima.list[19].weather[0].description }}</p>
-                                        <p>Temperatura: {{ datosClima.list[19].main.temp_min }}°C</p>
+                                        <p class="desclima">{{ datosClima.list[19].weather[0].description }}
+                                            <br>Temperatura: {{ datosClima.list[19].main.temp_min }}°C
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col colClima border">
                                     <div class="marC">
-                                        <h3>{{ getfecha(27)[0] }}</h3>
+                                        <p class="titclima">{{ getfecha(27)[0] }}</p>
                                         <img id="imgLibro" v-bind:src="iconoLink" />
-                                        <p>{{ datosClima.list[27].weather[0].description }}</p>
-                                        <p>Temperatura: {{ datosClima.list[27].main.temp_min }}°C</p>
+                                        <p class="desclima">{{ datosClima.list[27].weather[0].description }} <br>
+                                            Temperatura: {{ datosClima.list[27].main.temp_min }}°C
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col colClima border">
                                     <div class="marC">
-                                        <h3>{{ getfecha(35)[0] }}</h3>
+                                        <p class="titclima">{{ getfecha(35)[0] }}</p>
                                         <img id="imgLibro" v-bind:src="iconoLink" />
-                                        <p>{{ datosClima.list[35].weather[0].description }}</p>
-                                        <p>Temperatura: {{ datosClima.list[35].main.temp_min }}°C</p>
+                                        <p class="desclima">{{ datosClima.list[35].weather[0].description }}
+                                            <br>Temperatura: {{ datosClima.list[35].main.temp_min }}°C
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -100,14 +105,14 @@
             <div class="container border MenEquipaje" style="float:left">
                 <div class="container my-5">
                     <h5>No olvides revisar la lista de articulos prohibidos</h5>
-                    <h4 class="enlace">Click aqui</h4>
+                    <a href="https://www.iberia.com/mx/equipajes/articulos-peligrosos/">Click aqui</a>
                     <div class="col-md-12 ">
                         <div class="login-or">
                             <hr class="hr-or">
                         </div>
                     </div>
                     <h5>Información sobre transporte de mascotas</h5>
-                    <h4 class="enlace">Click aqui</h4>
+                    <a href="https://www.ceupe.com/blog/transporte-de-animales-en-el-avion.html">Click aqui</a>
                 </div>
             </div>
             <div class="container border CalEquipaje" style="float:right">
@@ -131,17 +136,19 @@
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Cantidad de maletas</label>
-                                <input type="number" min="0" max="5" class="form-control" placeholder="0">
+                                <input v-model="cantmaletas" type="number" min="0" max="5" class="form-control"
+                                    placeholder="0">
                             </div>
                             <div class="form-group">
                                 <label>Peso en kilos</label>
-                                <input type="number" min="0" max="35" class="form-control" placeholder="0">
+                                <input v-model="pesoMaleta" type="number" min="0" max="35" class="form-control"
+                                    placeholder="0">
                             </div>
                         </div>
                         <div class="col-8">
-                            <button class=" btn btn-block mybtn2 btn-primary tx-tfm">Calcular</button>
+                            <button @click="CalcularEquipaje()" class=" btn btn-block mybtn2 btn-primary tx-tfm">Calcular</button>
                             <br><br>
-                            <h1>0</h1>
+                            <h1>{{constEquipaje}}</h1>
                         </div>
                     </div>
                 </div>
@@ -159,16 +166,33 @@ export default {
     data: () => ({
         datosClima: null,
         iconoLink: "",
-        ciudad: "Ciudad Obregon"
+        ciudad: "Ciudad Obregon",
+        constEquipaje: 0,
+        cantmaletas: 0,
+        pesoMaleta: 0
     }),
     methods: {
         getfecha(dia) {
             return this.datosClima.list[dia].dt_txt.split(" ");
+        },
+        CalcularEquipaje(){
+            var precioXmaleta=300;
+            var precioXExtra=12;
+            var totMaletas=0;
+            var totPeso=0;
+            if(this.cantmaletas>1){
+                totMaletas=precioXmaleta*(this.cantmaletas-1);
+            }
+            if(this.pesoMaleta>25){
+                totPeso=precioXExtra* (this.pesoMaleta-25);
+            }
+            this.constEquipaje=totMaletas + totPeso;
         }
+
     },
     created() {
-        this.ciudad= this.ciudad.replace(" ","%20")
-        axios.get("https://api.openweathermap.org/data/2.5/forecast?lang=es&units=metric&q="+this.ciudad+"&appid=ce62b1ca2ee75f0ad8d8b0e155bf7cc0").then((result) => {
+        this.ciudad = this.ciudad.replace(" ", "%20")
+        axios.get("https://api.openweathermap.org/data/2.5/forecast?lang=es&units=metric&q=" + this.ciudad + "&appid=ce62b1ca2ee75f0ad8d8b0e155bf7cc0").then((result) => {
             this.datosClima = result.data;
             console.log(result.data);
             this.iconoLink = "http://openweathermap.org/img/wn/" + result.data.list[4].weather[0].icon + "@2x.png"

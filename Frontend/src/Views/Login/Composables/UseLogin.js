@@ -16,24 +16,32 @@ export function useLogin() {
     if (nomUsu.value == '' || password.value == ('')) {
       errorDatos.value = true;
     } else {
-      if (nomUsu.value == "admin@gmail.com") {
-        router.push({ name: 'AdminHome' });
-      } else {
-        console.log(nomUsu.value,password.value);
-        apiService.post('/tokens', {
-          username: nomUsu.value,
-          password: password.value
-        })
-          .then(function (response) {
+
+      console.log(nomUsu.value, password.value);
+      var body = {
+        username: nomUsu.value,
+        password: password.value
+      }
+      apiService({
+        method: 'post',
+        url: '/tokens',
+        data: body,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then(function (response) {
+          if (nomUsu.value == "UsuarioAdmin" && password.value == '1234') {
+            var idUsuario= response.data.access_token;
+            router.push({ name: 'AdminHome', params: { idUsuario } });
+          } else {
             router.push({ name: "ClientHome" });
             console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-            ValError.value = error.response.data.context.Message;
-            hasError.value = true;
-          })
-      }
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          ValError.value = error.response.data.context.Message;
+          hasError.value = true;
+        })
 
     }
   };
@@ -43,6 +51,7 @@ export function useLogin() {
     nomUsu,
     password,
     hasError,
-    errorDatos
+    errorDatos,
+    ValError
   };
 }

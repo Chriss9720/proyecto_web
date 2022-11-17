@@ -27,6 +27,7 @@
                 <div class="col-md-12 text-center ">
                   <br>
                   <p v-if="errorDatos" class="text-danger">!Ingrese todos los datos¡</p>
+                  <p v-if="hasError" class="text-danger">{{ValError}}</p>
                   <button class=" btn btn-block mybtn btn-primary tx-tfm">Ingresar</button>
                 </div>
                 <div class="col-md-12 ">
@@ -63,7 +64,8 @@ export default {
       nomUsu,
       password,
       hasError,
-      errorDatos
+      errorDatos,
+      ValError
     } = useLogin();
 
     return {
@@ -71,7 +73,8 @@ export default {
       makeLogin,
       password,
       hasError,
-      errorDatos
+      errorDatos,
+      ValError
     };
   }
 };
