@@ -66,7 +66,7 @@ const routes = [
     component: () => import('../components/LayoutClient.vue'),
     children: [
       {
-        path: '',
+        path: '/:idUsuario/',
         name: 'ClientHome',
         component: () => import(/* webpackChunkName: "cliente" */ '../Views/Client/ClientHome.vue')
       },

@@ -8,22 +8,40 @@
                     <p>Ingresa los siguientes datos para mostrarte nuestros vuelos disponibles</p>
                     <div class="row">
                         <div class="col">
-                            Origen
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="form-label" for="form6Example4">Destino: </p>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <select class="form-select btn btn-primary border" v-model="busPaisO"
+                                            v-on:change="cambioO(busPaisO)">
+                                            <option v-for="i of AeroPuertosO" v-bind:key="i" :value="i.id">{{
+                                                    i.direccion
+                                            }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col">
-                            Destino
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="form-label" for="form6Example4">Destino: </p>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <select class="form-select btn btn-primary border" v-model="busPaisD"
+                                            v-on:change="cambioD(busPaisD)">
+                                            <option v-for="i of AeroPuertosD" v-bind:key="i" :value="i.id">{{
+                                                    i.direccion
+                                            }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <br><br>
@@ -146,9 +164,10 @@
                             </div>
                         </div>
                         <div class="col-8">
-                            <button @click="CalcularEquipaje()" class=" btn btn-block mybtn2 btn-primary tx-tfm">Calcular</button>
+                            <button @click="CalcularEquipaje()"
+                                class=" btn btn-block mybtn2 btn-primary tx-tfm">Calcular</button>
                             <br><br>
-                            <h1>{{constEquipaje}}</h1>
+                            <h1>{{ constEquipaje }}</h1>
                         </div>
                     </div>
                 </div>
@@ -160,10 +179,13 @@
 
 <script>
 import axios from "axios";
+import { useCliente } from './composables/UseCliente';
 
 export default {
     name: "Cliente-Home",
     data: () => ({
+        busPaisO: "Selecciona un pais",
+        busPaisD: "Selecciona un pais",
         datosClima: null,
         iconoLink: "",
         ciudad: "Ciudad Obregon",
@@ -172,26 +194,42 @@ export default {
         pesoMaleta: 0,
         miHTML: ``
     }),
+    setup() {
+        const {
+            AeroPuertosO,
+            AeroPuertosD,
+            GetAllAeroPuertosD,
+            GetAllAeroPuertosO
+        } = useCliente();
+        return {
+            AeroPuertosO,
+            AeroPuertosD,
+            GetAllAeroPuertosD,
+            GetAllAeroPuertosO
+        }
+    },
     methods: {
         getfecha(dia) {
             return this.datosClima.list[dia].dt_txt.split(" ");
         },
-        CalcularEquipaje(){
-            var precioXmaleta=300;
-            var precioXExtra=12;
-            var totMaletas=0;
-            var totPeso=0;
-            if(this.cantmaletas>1){
-                totMaletas=precioXmaleta*(this.cantmaletas-1);
+        CalcularEquipaje() {
+            var precioXmaleta = 300;
+            var precioXExtra = 12;
+            var totMaletas = 0;
+            var totPeso = 0;
+            if (this.cantmaletas > 1) {
+                totMaletas = precioXmaleta * (this.cantmaletas - 1);
             }
-            if(this.pesoMaleta>25){
-                totPeso=precioXExtra* (this.pesoMaleta-25);
+            if (this.pesoMaleta > 25) {
+                totPeso = precioXExtra * (this.pesoMaleta - 25);
             }
-            this.constEquipaje=totMaletas + totPeso;
+            this.constEquipaje = totMaletas + totPeso;
         }
 
     },
     created() {
+        this.GetAllAeroPuertosD(this.$route.params.idUsuario);
+        this.GetAllAeroPuertosO(this.$route.params.idUsuario);
         this.ciudad = this.ciudad.replace(" ", "%20")
         axios.get("https://api.openweathermap.org/data/2.5/forecast?lang=es&units=metric&q=" + this.ciudad + "&appid=ce62b1ca2ee75f0ad8d8b0e155bf7cc0").then((result) => {
             this.datosClima = result.data;

@@ -29,11 +29,12 @@ export function useLogin() {
         headers: { "Content-Type": "multipart/form-data" },
       })
         .then(function (response) {
+          var idUsuario= response.data.access_token;
           if (nomUsu.value == "UsuarioAdmin" && password.value == '1234') {
-            var idUsuario= response.data.access_token;
             router.push({ name: 'AdminHome', params: { idUsuario } });
           } else {
-            router.push({ name: "ClientHome" });
+            console.log("el id es ",idUsuario);
+            router.push({ name: 'ClientHome', params: { idUsuario } });
             console.log(response);
           }
         })
