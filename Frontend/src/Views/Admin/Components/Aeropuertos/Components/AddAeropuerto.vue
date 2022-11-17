@@ -57,7 +57,7 @@
                                 class=" btn btn-block mybtn btn-primary tx-tfm">Cancelar</button>
                             <button v-on:click="vCancelar()" v-if="correcto"
                                 class=" btn btn-block mybtn btn-primary tx-tfm">Volver</button>
-                            <button v-on:click="RegistrarAeroPuerto($route.params.idUsuario)" v-if="!correcto"
+                            <button @click.prevent="RegistrarAeroPuerto($route.params.idUsuario)" v-if="!correcto"
                                 class=" btn btn-block mybtn btn-primary tx-tfm">Guardar</button>
                         </div>
                     </form>

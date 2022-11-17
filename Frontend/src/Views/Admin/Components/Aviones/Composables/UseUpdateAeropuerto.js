@@ -16,20 +16,18 @@ export function useUpdateAeroPuerto() {
   const AeroPuerto = ref('');
 
   const ActualizarAeroPuerto = async (idUsuario, idAeroPuerto) => {
-    var id = parseInt(idAeroPuerto);
     ErrorDatos.value = false;
     Error.value = false;
     correcto.value = false;
     if (nombre.value == '' || ciudad.value == '' || direccion.value == '' || codigoPostal.value == '') {
       ErrorDatos.value = true;
     } else {
-      console.log("el id es",id);
-      apiService.put(`/aereoPuerto/${id}`, {
+      apiService.put(`/aereoPuerto/${idAeroPuerto}`, {
         ciudad_id: ciudad.value,
         nombre: nombre.value,
         direccion: direccion.value,
         codigo_postal: codigoPostal.value
-      }, {
+      },{
         headers: {
           authorization: `Bearer ${idUsuario}`
         }
@@ -51,19 +49,16 @@ export function useUpdateAeroPuerto() {
   }
 
   const GetAeroPuerto = async (idUsuario, idAeroPuerto) => {
-    var id = parseInt(idAeroPuerto);
-    apiService.get(`/aereoPuerto/id/${id}`, {
+    apiService.get(`/aereoPuerto/id/{${idAeroPuerto}`, {
       headers: {
         authorization: `Bearer ${idUsuario}`
       }
     })
       .then(function (response) {
-        console.log("regreso", response);
-        AeroPuerto.value = response.data;
-        nombre.value = AeroPuerto.value.nombre;
-        direccion.value = AeroPuerto.value.direccion;
-        codigoPostal.value = AeroPuerto.value.codigo_postal;
-
+        AeroPuerto.value=response.data;
+        nombre.value=AeroPuerto.value.nombre;
+        direccion.value=AeroPuerto.value.direccion;
+        codigoPostal.value=AeroPuerto.value.codigo_postal;
       })
       .catch(function (error) {
         console.log(error);
@@ -82,6 +77,6 @@ export function useUpdateAeroPuerto() {
     ErrorDatos,
     ValError,
     GetAeroPuerto,
-    AeroPuerto
+    AeroPuerto 
   };
 }

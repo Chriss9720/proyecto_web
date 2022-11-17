@@ -13,6 +13,7 @@ export function useAddPiloto() {
   const ValError = ref('');
 
   const RegistrarPiloto = async (idUsuario) => {
+    console.log("entra a registrar piloto");
     ErrorDatos.value = false;
     Error.value = false;
     correcto.value = false;
@@ -43,6 +44,7 @@ export function useAddPiloto() {
           Error.value = true;
         })
     }
+    console.log("sale sin error");
   }
 
   return {

@@ -27,6 +27,19 @@ export function useAddAeropuerto() {
         console.log(error);
       })
   }
+  const getPais = async (idUsuario, idPais) => {
+    apiService.get(`/paisEstado/pais/uno/${idPais}`,  {
+      headers: {
+        authorization: `Bearer ${idUsuario}`
+      }
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
   const getCiudades = async (idUsuario, id) => {
     apiService.get(`/paisEstado/estados/${id}`,  {
       headers: {
@@ -75,6 +88,7 @@ export function useAddAeropuerto() {
   }
 
   return {
+    getPais,
     nombre,
     ciudad,
     direccion,

@@ -52,6 +52,11 @@ const routes = [
         path: '/VerAeropuerto/:idUsuario/:idAeropuerto/',
         name: 'VerAeropuerto',
         component: () => import(/* webpackChunkName: "login" */ '../Views/Admin/Components/Aeropuertos/Components/VerAeropuerto.vue')
+      },
+       {
+        path: '/AddAvion/:idUsuario/',
+        name: 'AddAvion',
+        component: () => import(/* webpackChunkName: "login" */ '../Views/Admin/Components/Aviones/Components/AddAvion.vue')
       }
     ]
   },

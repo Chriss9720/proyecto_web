@@ -15,7 +15,7 @@ export function useVerPiloto() {
     })
       .then(function (response) {
         pilotos.value = response.data.pilotos;
-        console.log(pilotos.value);
+        console.log("los pilotos son",pilotos.value);
       })
       .catch(function (error) {
         console.log(error);

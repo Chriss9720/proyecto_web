@@ -34,7 +34,7 @@
                         </div>
                         <div class="text-center">
                             <br>
-                            <h4 v-if="correcto" class="text-success">Registro exitoso</h4>
+                            <h4 v-if="correcto" class="text-success">Modificación exitosa</h4>
                             <h4 v-if="Error" class="text-danger">{{ ValError }}</h4>
                             <h4 v-if="ErrorDatos" class="text-danger">!Ingrese todos los datos¡</h4>
                             <button v-on:click="vCancelar()" v-if="NoEditar"
@@ -44,7 +44,7 @@
                                 class=" btn btn-block mybtn btn-primary tx-tfm">Cancelar</button>
                             <button v-on:click="NoEditar = false" v-if="NoEditar"
                                 class=" btn btn-block mybtn btn-primary tx-tfm">Modificar</button>
-                            <button v-on:click="NoEditar = false, ActualizarPiloto($route.params.idUsuario, $route.params.idPiloto,piloto.total_vuelos)" v-if="!NoEditar"
+                            <button @click.prevent="NoEditar = false, ActualizarPiloto($route.params.idUsuario, $route.params.idPiloto,piloto.total_vuelos)" v-if="!NoEditar"
                                 class=" btn btn-block mybtn btn-primary tx-tfm">Guardar</button>
                         </div>
                     </form>

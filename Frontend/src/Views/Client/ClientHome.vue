@@ -169,7 +169,8 @@ export default {
         ciudad: "Ciudad Obregon",
         constEquipaje: 0,
         cantmaletas: 0,
-        pesoMaleta: 0
+        pesoMaleta: 0,
+        miHTML: ``
     }),
     methods: {
         getfecha(dia) {

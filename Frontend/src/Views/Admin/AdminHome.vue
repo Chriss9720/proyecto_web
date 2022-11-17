@@ -49,7 +49,7 @@
         <div id="cont" class="col-sm-8">
           <pilotos v-if="ventanaPilotos" :id-usuario="$route.params.idUsuario" />
           <Aeropuertos v-if="ventanaAero" :id-usuario="$route.params.idUsuario" />
-          <Aviones v-if="ventanaAviones"/>
+          <Aviones v-if="ventanaAviones" :id-usuario="$route.params.idUsuario"/>
           <div class="perfil" v-if="ventanaPerfil">
             <ModPerfil :tipoEmpleado="false" :titulo="tit" />
             <div class="text-center">
@@ -68,7 +68,7 @@
 <script>
 import Pilotos from './Components/Piloto/Pilotos.vue';
 import Aeropuertos from './Components/Aeropuertos/Aeropuertos.vue';
-import Aviones from './Components/Aviones';
+import Aviones from './Components/Aviones/Aviones.vue';
 import ModPerfil from '../Login/Components/Registro';
 
 export default {

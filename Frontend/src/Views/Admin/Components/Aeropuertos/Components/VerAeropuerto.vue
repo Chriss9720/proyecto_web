@@ -19,7 +19,7 @@
                                 <div class="col">
                                     <label class="form-label">Selecciona el pais:</label>
                                     <select class="form-select btn btn-primary border" v-model="busPais"
-                                        v-on:change="cambio(busPais)" :disabled="modAeropuerto">
+                                        v-on:change="cambio(busPais)" :disabled="NoEditar">
                                         <option v-for="i of paises" v-bind:key="i" :value="i.id">{{ i.name }}</option>
                                     </select>
 
@@ -27,7 +27,7 @@
                                 <div class="col">
                                     <label class="form-label">Selecciona el estado:</label>
                                     <select class="form-select btn btn-primary border" v-model="busCiudad"
-                                        v-on:change="cambioCiudad(busCiudad)" :disabled="modAeropuerto">
+                                        v-on:change="cambioCiudad(busCiudad)" :disabled="NoEditar">
                                         <option v-for="i of ciudades" v-bind:key="i" :value="i.id">{{ i.name }}</option>
                                     </select>
 
@@ -37,28 +37,31 @@
                         </div>
                         <div class="form-outline mb-4">
                             <label class="form-label" for="form6Example4">Nombre:</label>
-                            <input :disabled="modAeropuerto" v-model="nombre" type="text" id="form6Example4"
+                            <input :disabled="NoEditar" v-model="nombre" type="text" id="form6Example4"
                                 class="form-control" />
 
                         </div>
                         <div class="form-outline mb-4">
                             <label class="form-label">Dirección:</label>
-                            <input :disabled="modAeropuerto" v-model="direccion" type="text" class="form-control" />
+                            <input :disabled="NoEditar" v-model="direccion" type="text" class="form-control" />
                         </div>
                         <div class="form-outline mb-4 ">
                             <label class="form-label">Código postal:</label>
-                            <input :disabled="modAeropuerto" v-model="codigoPostal" type="text" class="form-control" />
+                            <input :disabled="NoEditar" v-model="codigoPostal" type="text" class="form-control" />
                         </div>
                         <div class="text-center">
                             <br>
-                            <h4 v-if="correcto" class="text-success">Registro exitoso</h4>
+                            <h4 v-if="correcto" class="text-success">Modificación exitosa</h4>
                             <h4 v-if="Error" class="text-danger">{{ ValError }}</h4>
                             <h4 v-if="ErrorDatos" class="text-danger">!Ingrese todos los datos¡</h4>
-                            <button v-on:click="vCancelar()" v-if="!correcto"
-                                class=" btn btn-block mybtn btn-primary tx-tfm">Cancelar</button>
-                            <button v-on:click="vCancelar()" v-if="correcto"
+                            <button v-on:click="vCancelar()" v-if="NoEditar"
                                 class=" btn btn-block mybtn btn-primary tx-tfm">Volver</button>
-                            <button v-on:click="ActualizarAeroPuerto($route.params.idUsuario)" v-if="!correcto"
+                            <button v-if="!NoEditar"
+                                v-on:click="GetAeroPuerto($route.params.idUsuario, $route.params.idPiloto), NoEditar = true"
+                                class=" btn btn-block mybtn btn-primary tx-tfm">Cancelar</button>
+                            <button v-on:click="NoEditar = false" v-if="NoEditar"
+                                class=" btn btn-block mybtn btn-primary tx-tfm">Modificar</button>
+                            <button @click.prevent="NoEditar = true, ActualizarAeroPuerto($route.params.idUsuario, $route.params.idAeropuerto)" v-if="!NoEditar"
                                 class=" btn btn-block mybtn btn-primary tx-tfm">Guardar</button>
                         </div>
                     </form>
@@ -77,7 +80,7 @@ export default {
     data: () => ({
         busPais: "Selecciona un pais",
         busCiudad: "Selecciona el estado",
-        modAeropuerto: true
+        NoEditar: true
     }),
     setup() {
         const {
@@ -94,12 +97,14 @@ export default {
             AeroPuerto
         } = useUpdateAeroPuerto();
         const {
+            getPais,
             getPaises,
             paises,
             getCiudades,
             ciudades
         } = useAddAeropuerto();
         return {
+            getPais,
             nombre,
             ciudad,
             direccion,

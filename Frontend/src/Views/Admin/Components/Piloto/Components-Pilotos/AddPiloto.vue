@@ -31,19 +31,19 @@
                         <div class="form-outline mb-4 ">
                             <label class="form-label">Vuelos: 0 </label>
                         </div>
-                        <div class="text-center">
-                            <br>
-                            <h4 v-if="correcto" class="text-success">Registro exitoso</h4>
-                            <h4 v-if="Error" class="text-danger">{{ ValError }}</h4>
-                            <h4 v-if="ErrorDatos" class="text-danger">!Ingrese todos los datos¡</h4>
-                            <button v-on:click="vCancelar()" v-if="!correcto"
-                                class=" btn btn-block mybtn btn-primary tx-tfm">Cancelar</button>
-                            <button v-on:click="vCancelar()" v-if="correcto"
-                                class=" btn btn-block mybtn btn-primary tx-tfm">Volver</button>
-                            <button v-on:click="RegistrarPiloto($route.params.idUsuario)" v-if="!correcto"
-                                class=" btn btn-block mybtn btn-primary tx-tfm">Guardar</button>
-                        </div>
                     </form>
+                    <div class="text-center">
+                        <br>
+                        <h4 v-if="correcto" class="text-success">Registro exitoso</h4>
+                        <h4 v-if="Error" class="text-danger">{{ ValError }}</h4>
+                        <h4 v-if="ErrorDatos" class="text-danger">!Ingrese todos los datos¡</h4>
+                        <button v-on:click="vCancelar()" v-if="!correcto"
+                            class=" btn btn-block mybtn btn-primary tx-tfm">Cancelar</button>
+                        <button v-on:click="vCancelar()" v-if="correcto"
+                            class=" btn btn-block mybtn btn-primary tx-tfm">Volver</button>
+                        <button @click.prevent="RegistrarPiloto($route.params.idUsuario)" v-if="!correcto"
+                            class=" btn btn-block mybtn btn-primary tx-tfm">Guardar</button>
+                    </div>
                 </div>
             </div>
         </section>
