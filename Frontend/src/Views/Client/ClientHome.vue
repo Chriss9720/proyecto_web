@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <br><br>
-                    <button class=" btn btn-block mybtn2 btn-primary tx-tfm">
+                    <button @click="BuscarAviones()" class=" btn btn-block mybtn2 btn-primary tx-tfm">
                         <h1>Buscar Vuelos</h1>
                     </button>
                 </div>
@@ -224,8 +224,13 @@ export default {
                 totPeso = precioXExtra * (this.pesoMaleta - 25);
             }
             this.constEquipaje = totMaletas + totPeso;
+        },
+        BuscarAviones(){
+            if(cantAviones<0){
+                confirm("Lo siento, no tenemos aviones para esa ruta");
+            }
         }
-
+    
     },
     created() {
         this.GetAllAeroPuertosD(this.$route.params.idUsuario);
