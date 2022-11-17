@@ -64,4 +64,4 @@ class AereoPuertoCRUD(AppCRUD):
         ).filter(
             AereoPuertoDB.deleted == None,
             AereoPuertoDB.id == id
-        ).all()
+        ).first()
