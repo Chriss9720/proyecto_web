@@ -35,6 +35,6 @@ class PaisEstadoCRUD(AppCRUD):
             PaisDB.id,
             PaisDB.clave.label("code"),
             PaisDB.pais.label("name")
-        ).first(
+        ).filter(
             PaisDB.id == id
         ).first()
