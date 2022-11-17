@@ -11,3 +11,6 @@ class PaisEstadoService(AppService):
 
     def estado_by_pais(self, pais_id) -> ServiceResult:
         return ServiceResult({'estados': [estado for estado in PaisEstadoCRUD(self.db).estado_by_pais(pais_id)]})
+
+    def get_un_estado(self, id) -> ServiceResult:
+        return ServiceResult(PaisEstadoCRUD(self.db).get_un_estado(id))

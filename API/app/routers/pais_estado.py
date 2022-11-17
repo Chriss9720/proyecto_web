@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, Request
 from services.pais_estado import PaisEstadoService
 
 from schemas.user import User
-from schemas.paises_estados import Paises, Estados
+from schemas.paises_estados import Paises, Estados, Pais
 
 from utils.auth import get_current_user
 from utils.service_result import handle_result
@@ -24,4 +24,9 @@ async def paises(request: Request, db: get_db = Depends(), current_user: User = 
 @router.get("/estados/{id}", response_model=Estados)
 async def paises(request: Request, id: int, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
     result = handle_result(PaisEstadoService(db).estado_by_pais(id))
+    return result
+
+@router.get("/estados/uno/{id}", response_model=Pais)
+async def paises(request: Request, id: int, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
+    result = handle_result(PaisEstadoService(db).get_un_estado(id))
     return result
