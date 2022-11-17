@@ -22,7 +22,7 @@ async def registro(request: Request, item: UserRegister, db: get_db = Depends())
     return result
 
 @router.get("/")
-async def get(request: Request, id:int, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
+async def get(request: Request, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
     result = handle_result(UserService(db).get_by_id(id))
     return result
 
