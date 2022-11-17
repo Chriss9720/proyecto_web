@@ -14,3 +14,6 @@ class PaisEstadoService(AppService):
 
     def get_un_estado(self, id) -> ServiceResult:
         return ServiceResult(PaisEstadoCRUD(self.db).get_un_estado(id))
+    
+    def get_un_pais(self, id) -> ServiceResult:
+        return ServiceResult(PaisEstadoCRUD(self.db).get_un_pais(id))

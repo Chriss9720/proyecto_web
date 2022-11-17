@@ -30,3 +30,8 @@ async def paises(request: Request, id: int, db: get_db = Depends(), current_user
 async def paises(request: Request, id: int, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
     result = handle_result(PaisEstadoService(db).get_un_estado(id))
     return result
+
+@router.get("/pais/uno/{id}", response_model=Pais)
+async def paises(request: Request, id: int, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
+    result = handle_result(PaisEstadoService(db).get_un_pais(id))
+    return result

@@ -29,3 +29,12 @@ class PaisEstadoCRUD(AppCRUD):
         ).filter(
             CiudadDB.id == id
         ).first()
+
+    def get_un_pais(self, id) -> PaisDB:
+        return self.db.query(
+            PaisDB.id,
+            PaisDB.clave.label("code"),
+            PaisDB.pais.label("name")
+        ).first(
+            PaisDB.id == id
+        ).first()
