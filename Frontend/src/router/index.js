@@ -24,7 +24,7 @@ const routes = [
     component: () => import('../components/LayoutAdmin.vue'),
     children: [
       {
-        path: '',
+        path: '/:idUsuario/',
         name: 'AdminHome',
         component: () => import(/* webpackChunkName: "login" */ '../Views/Admin/AdminHome.vue')
       },
@@ -32,6 +32,26 @@ const routes = [
         path: '/',
         name: 'GraficaVentas',
         component: () => import(/* webpackChunkName: "login" */ '../Views/Admin/Components/GraficaVentas')
+      },
+      {
+        path: '/AddPiloto/:idUsuario/',
+        name: 'AddPiloto',
+        component: () => import(/* webpackChunkName: "login" */ '../Views/Admin/Components/Piloto/Components-Pilotos/AddPiloto.vue')
+      },
+      {
+        path: '/VerPiloto/:idUsuario/:idPiloto/',
+        name: 'VerPiloto',
+        component: () => import(/* webpackChunkName: "login" */ '../Views/Admin/Components/Piloto/Components-Pilotos/VerPiloto.vue')
+      },
+      {
+        path: '/AddAeroPuerto/:idUsuario/',
+        name: 'AddAeroPuerto',
+        component: () => import(/* webpackChunkName: "login" */ '../Views/Admin/Components/Aeropuertos/Components/AddAeropuerto.vue')
+      },
+      {
+        path: '/VerAeropuerto/:idUsuario/:idAeropuerto/',
+        name: 'VerAeropuerto',
+        component: () => import(/* webpackChunkName: "login" */ '../Views/Admin/Components/Aeropuertos/Components/VerAeropuerto.vue')
       }
     ]
   },

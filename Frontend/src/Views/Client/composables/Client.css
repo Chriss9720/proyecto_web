@@ -41,7 +41,7 @@ p {
 }
 .climaDatos{
     width: 90%;
-    height: 300px;
+    height: 100%;
 }
 .secEquipaje{
     height: 100vh;
@@ -75,7 +75,7 @@ width: 70%;
 }
 .colClima{
     background-color: black;
-    height: 320px;
+    height: 200px;
 }
 .marC{
     margin-top: 10%;
@@ -87,3 +87,29 @@ width: 70%;
     color: #3498db;
     text-decoration: underline;
   }
+  #imgLibro{
+    width: 30px;
+    height: 30px;
+   } 
+.titclima{
+    font-size: 15px;
+}
+.desclima{
+    font-size: 12px;
+}
+@media (min-width: 992px) {
+   #imgLibro{
+    width: 100px;
+    height: 100px;
+   } 
+   .titclima{
+    font-size: 24px;
+}
+.desclima{
+    font-size: 16px;
+}
+.colClima{
+    background-color: black;
+    height: 300px;
+}
+}

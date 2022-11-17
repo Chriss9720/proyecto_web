@@ -27,13 +27,6 @@
                   Aviones
                 </a>
               </li>
-              <li>
-                <a @click="vVentasHora()" style="cursor:pointer;" class="nav-link link-dark bot">
-                  <svg class="bi me-2" width="16" height="30">
-                  </svg>
-                  Graficas
-                </a>
-              </li>
             </ul>
             <hr>
             <div class="dropdown">
@@ -54,9 +47,8 @@
           </div>
         </div>
         <div id="cont" class="col-sm-8">
-          <grafica-ventas v-if="ventanaVentasHora" />
-          <pilotos v-if="ventanaPilotos" />
-          <Aeropuertos v-if="ventanaAero" />
+          <pilotos v-if="ventanaPilotos" :id-usuario="$route.params.idUsuario" />
+          <Aeropuertos v-if="ventanaAero" :id-usuario="$route.params.idUsuario" />
           <Aviones v-if="ventanaAviones"/>
           <div class="perfil" v-if="ventanaPerfil">
             <ModPerfil :tipoEmpleado="false" :titulo="tit" />
@@ -74,9 +66,8 @@
 </template>
 
 <script>
-import GraficaVentas from './Components/GraficaVentas';
-import Pilotos from './Components/Pilotos.vue';
-import Aeropuertos from './Components/Aeropuertos';
+import Pilotos from './Components/Piloto/Pilotos.vue';
+import Aeropuertos from './Components/Aeropuertos/Aeropuertos.vue';
 import Aviones from './Components/Aviones';
 import ModPerfil from '../Login/Components/Registro';
 
@@ -84,7 +75,6 @@ export default {
   name: 'Admin-v',
   components:
   {
-    GraficaVentas,
     Pilotos,
     Aeropuertos,
     Aviones,
@@ -92,7 +82,6 @@ export default {
   },
   data: () => ({
     tit: "Información del perfil",
-    ventanaVentasHora: false,
     ventanaPilotos: true,
     ventanaAero: false,
     ventanaAviones: false,
@@ -100,29 +89,19 @@ export default {
     modperfil: false
   }),
   methods: {
-    vVentasHora() {
-      this.ventanaVentasHora = true;
-      this.ventanaPilotos = false;
-      this.ventanaAero = false;
-      this.ventanaAviones = false;
-      this.ventanaPerfil = false;
-    },
     vPiloto() {
-      this.ventanaVentasHora = false;
       this.ventanaPilotos = true;
       this.ventanaAero = false;
       this.ventanaAviones = false;
       this.ventanaPerfil = false;
     },
     vAeropuertos() {
-      this.ventanaVentasHora = false;
       this.ventanaPilotos = false;
       this.ventanaAero = true;
       this.ventanaAviones = false;
       this.ventanaPerfil = false;
     },
     vAviones() {
-      this.ventanaVentasHora = false;
       this.ventanaPilotos = false;
       this.ventanaAero = false;
       this.ventanaAviones = true;

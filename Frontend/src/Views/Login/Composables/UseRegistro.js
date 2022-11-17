@@ -36,8 +36,15 @@ export function useRegistro() {
           console.log(response);
         })
         .catch(function (error) {
+          console.log("anda en el error? aqui")
           console.log(error);
-          ValError.value= error.response.data.context.Message;
+          try{
+            ValError.value= error.response.data.context.Message;
+          }catch(e){
+            ValError.value="Ocurrio un error, verifique los datos ingresados"
+          }
+          console.log(ValError.value);
+          console.log("anda en el error?")
           Error.value = true;
         })
     }
