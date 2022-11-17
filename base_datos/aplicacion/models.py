@@ -107,7 +107,7 @@ class Asiento(SafeDeleteModel):
     fila = models.CharField(max_length=1)
     columna= models.CharField(max_length=1)
     primera_clase = models.BooleanField(default=False)
-    Asiento = models.CharField(max_length=2)
+    Asiento = models.CharField(max_length=10)
     disponible = models.BooleanField(default=False)
     avion = models.ForeignKey(Avion, related_name='+', on_delete=models.CASCADE)
     costo = models.FloatField(default=0)
