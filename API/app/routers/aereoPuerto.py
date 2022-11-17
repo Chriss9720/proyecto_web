@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, Request
 from services.aereoPuerto import AereoPuertoService
 
 from schemas.user import User
-from schemas.aereoPuerto import PostAereoPuerto, AereoPuertos
+from schemas.aereoPuerto import PostAereoPuerto, AereoPuertos, AereoPuerto
 
 from utils.auth import get_current_user
 from utils.service_result import handle_result
@@ -36,7 +36,7 @@ async def get_all(request: Request, db: get_db = Depends(), current_user: User =
     result = handle_result(AereoPuertoService(db).get_all())
     return result
 
-@router.get("/id/{id}", response_model=AereoPuertos)
+@router.get("/id/{id}", response_model=AereoPuerto)
 async def get_all(request: Request, id:int, db: get_db = Depends(), current_user: User = Depends(get_current_user)):
     result = handle_result(AereoPuertoService(db).get_by_id(id))
     return result

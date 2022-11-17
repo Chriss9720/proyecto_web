@@ -48,7 +48,13 @@ class AereoPuertoService(AppService):
         return ServiceResult({'aereo_puertos': result})
 
     def get_by_id(self, id) -> ServiceResult:
-        aereoPuerto_db = AereoPuertoCRUD(self.db).get_by_id(id)
-        if (not aereoPuerto_db):
+        aereoPuerto = AereoPuertoCRUD(self.db).get_by_id(id)
+        if (not aereoPuerto):
             return ServiceResult(AppException.AereoPuerto({'detail': f'No existe un aereo puerto con el id: {id}'}))
-        return ServiceResult(aereoPuerto_db)
+        return ServiceResult({
+            "ciudad_id": str(aereoPuerto.ciudad_id),
+            "nombre": aereoPuerto.nombre,
+            "direccion": aereoPuerto.direccion,
+            "codigo_postal": aereoPuerto.codigo_postal,
+            "id": aereoPuerto.id
+        })
