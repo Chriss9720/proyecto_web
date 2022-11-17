@@ -10,7 +10,7 @@ class AsientoDB(Base):
     columna = Column(String(1))
     fila = Column(String(1))
     primera_clase = Column(Boolean, default=False)
-    Asiento = Column(String(2))
+    Asiento = Column(String(10))
     disponible = Column(Boolean, default=True)
     costo = Column(Float, default=1500.99)
     avion_id = Column(BigInteger, ForeignKey(f"{AvionDB.__tablename__}.id"))
