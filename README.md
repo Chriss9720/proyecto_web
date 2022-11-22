@@ -3,7 +3,7 @@
 URL del video:
 https://drive.google.com/drive/folders/1QZhYpsHhO1sVpy4uHMwZ2NIGc-0SSdzv?usp=sharing
 
-## Pre-requisistos
+## Pre-requisistos para API
 
 ### Crear env
 
@@ -19,4 +19,14 @@ pip install -r .\requirements.txt
 
 ## Correr el proyecto
 
-uvicorn main:app --reload
+uvicorn main:app --reload --port 8001
+
+## Pre-requisistos para Front
+
+### Instalar librerias
+
+npm i
+
+## Correr el proyecto
+
+npm run serve
