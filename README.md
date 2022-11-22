@@ -1,6 +1,5 @@
-# FastAPI Template
+# Proyecto de Topicos avanzados de programacion web:
 
-Proyecto de Topicos avanzados de programacion web:
 URL del video:
 https://drive.google.com/drive/folders/1QZhYpsHhO1sVpy4uHMwZ2NIGc-0SSdzv?usp=sharing
 
