@@ -226,11 +226,13 @@ export default {
             this.constEquipaje = totMaletas + totPeso;
         },
         BuscarAviones(){
-            if(cantAviones<0){
-                confirm("Lo siento, no tenemos aviones para esa ruta");
+            var cantAviones=1;
+            if(cantAviones<=0){
+                confirm("Disculpa, no tenemos aviones para esa ruta");
+            }else{
+                this.$router.push({ name: 'Vuelos'});
             }
         }
-    
     },
     created() {
         this.GetAllAeroPuertosD(this.$route.params.idUsuario);

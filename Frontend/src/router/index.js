@@ -74,6 +74,16 @@ const routes = [
         path: '/',
         name: 'Perfil',
         component: () => import(/* webpackChunkName: "cliente" */ '../Views/Client/Components/Perfil.vue')
+      },
+      {
+        path: '/',
+        name: 'Vuelos',
+        component: () => import(/* webpackChunkName: "cliente" */ '../Views/Client/Components/Vuelos.vue')
+      },
+      {
+        path: '/',
+        name: 'CompraBoletos',
+        component: () => import(/* webpackChunkName: "cliente" */ '../Views/Client/Components/CompraBoleto.vue')
       }
     ]
   }
